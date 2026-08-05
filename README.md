@@ -1,2 +1,2 @@
 # guestbook
-Guestbook
+An Easy Guestbook
