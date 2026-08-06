@@ -1,50 +1,89 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<title>Evas Gästbok</title>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <title>Evas Gästbok | Fair Darling of Scandinavia</title>
 </head>
 
 <body>
+    <main class="container">
 
-<h1>Evas Gästbok</h1>
+        <header class="hero">
+            <p class="brand-name">
+                Fair Darling of Scandinavia
+            </p>
 
-<form action="/save" method="post">
+            <h1>Evas Gästbok</h1>
 
-<input
-type="text"
-name="title"
-placeholder="Rubrik">
+            <p class="intro">
+                Lämna gärna en liten hälsning, en tanke
+                eller några vackra ord.
+            </p>
 
-<br><br>
+            <div class="flower">❀</div>
+        </header>
 
-<textarea
-name="message"
-rows="6"
-cols="40"
-placeholder="Meddelande">
-</textarea>
+        <section class="guestbook-form">
+            <h2>Skriv en hälsning</h2>
 
-<br><br>
+            <form action="/save" method="post">
+                <label for="title">Namn eller rubrik</label>
 
-<button>Spara</button>
+                <input
+                    id="title"
+                    type="text"
+                    name="title"
+                    placeholder="Till exempel: Hälsningar från Anna"
+                    required
+                >
 
-</form>
+                <label for="message">Din hälsning</label>
 
-<hr>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    placeholder="Skriv några fina ord..."
+                    required
+                ></textarea>
 
-<h2>Äldre inlägg</h2>
+                <button type="submit">
+                    Spara hälsningen
+                </button>
+            </form>
+        </section>
 
-{% for title, message in posts %}
+        <section class="messages">
+            <h2>Tidigare hälsningar</h2>
 
-<h3>{{ title }}</h3>
+            {% for title, message in posts %}
+                <article class="post">
+                    <span class="post-flower">❀</span>
+                    <h3>{{ title }}</h3>
+                    <p>{{ message }}</p>
+                </article>
+            {% else %}
+                <p class="empty-message">
+                    Gästboken väntar på sin första hälsning.
+                </p>
+            {% endfor %}
+        </section>
 
-<p>{{ message }}</p>
+        <footer>
+            <p>Fair Darling of Scandinavia</p>
+            <span>Med värme och omtanke</span>
+        </footer>
 
-<hr>
-
-{% endfor %}
-
+    </main>
 </body>
 </html>
